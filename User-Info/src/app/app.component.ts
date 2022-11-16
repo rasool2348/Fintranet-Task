@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Item } from 'src/models/item';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'User-Info';
+
+  items:Item[] = [
+    new Item('Upload Image','upload'),
+    new Item('User Info','upload'),
+    new Item('People','people'),
+    new Item('Confirmation','confirmation'),
+  ]
 }

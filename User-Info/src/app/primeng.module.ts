@@ -6,6 +6,7 @@ import {DropdownModule} from 'primeng/dropdown';
 import {InputTextModule} from 'primeng/inputtext';
 import {TableModule} from 'primeng/table';
 import {CardModule} from 'primeng/card';
+import {StepsModule} from 'primeng/steps';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {CardModule} from 'primeng/card';
     DropdownModule,
     InputTextModule,
     TableModule,
-    CardModule
+    CardModule,
+    StepsModule
   ],
   exports:[
     FileUploadModule,
@@ -27,7 +29,8 @@ import {CardModule} from 'primeng/card';
     DropdownModule,
     InputTextModule,
     TableModule,
-    CardModule
+    CardModule,
+    StepsModule
   ]
   
 })
