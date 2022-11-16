@@ -9,7 +9,7 @@
     <ng-template pTemplate="body" let-user>
         <tr (click)="selectUser(user)" [style.backgroundColor]="userService.selectedUser == user ? 'lightblue' : ''">
             <td *ngFor="let col of cols">
-                    {{col.field == 'date' ? user[col.field].toDateString() : user[col.field]}}
+                {{col.field == 'date' ? user[col.field].toDateString() : user[col.field]}}
             </td>
         </tr>
     </ng-template>

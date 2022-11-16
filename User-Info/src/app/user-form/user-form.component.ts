@@ -11,37 +11,37 @@ import { Subscription } from 'rxjs';
   selector: 'app-user-form',
   templateUrl: './user-form.component.html',
   styleUrls: ['./user-form.component.css'],
-  encapsulation:ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None
 })
-export class UserFormComponent implements OnInit,OnDestroy {
+export class UserFormComponent implements OnInit, OnDestroy {
 
-  constructor(private fb:FormBuilder,public userService:UserService) { }
-  
+  constructor(private fb: FormBuilder, public userService: UserService) { }
+
   userForm = this.fb.group({
-    amount : [0,[Validators.required]],
-    date: [new Date(),[Validators.required,DateValidator.LessThanToday]],
-    status: ['',Validators.required],
-    fund: ['',[Validators.required, Validators.pattern('^[a-zA-Z \-\']+')]] 
+    amount: [0, [Validators.required]],
+    date: [new Date(), [Validators.required, DateValidator.LessThanToday]],
+    status: ['', Validators.required],
+    fund: ['', [Validators.required, Validators.pattern('^[a-zA-Z \-\']+')]]
   })
 
   statuses = [
-    {name:'Open to work',code:'Open to work'},
-    {name:'Working',code:'Working'},
-    {name:'Retired',code:'Retired'},
-    {name:'Open to hire',code:'Open to hire'},
+    { name: 'Open to work', code: 'Open to work' },
+    { name: 'Working', code: 'Working' },
+    { name: 'Retired', code: 'Retired' },
+    { name: 'Open to hire', code: 'Open to hire' },
   ]
 
-  subscription:Subscription;
-  
+  subscription: Subscription;
+
   ngOnInit(): void {
     this.subscription = this.userService.selectUser.subscribe(
       user => {
         this.userForm.patchValue(
           {
-            amount:user.amount,
-            date:user.date,
-            status:user.status,
-            fund:user.fund
+            amount: user.amount,
+            date: user.date,
+            status: user.status,
+            fund: user.fund
           }
         )
       }
@@ -52,7 +52,7 @@ export class UserFormComponent implements OnInit,OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  
+
 
 
 
@@ -61,13 +61,13 @@ export class UserFormComponent implements OnInit,OnDestroy {
 
 export class DateValidator {
 
-   static LessThanToday(control: FormControl): ValidationErrors | null {
-        let today : Date = new Date();
-        let fiveDaysInMilliSeconds = 5 * 24 * 60 * 60 * 1000;
+  static LessThanToday(control: FormControl): ValidationErrors | null {
+    let today: Date = new Date();
+    let fiveDaysInMilliSeconds = 5 * 24 * 60 * 60 * 1000;
 
-       if (new Date(control.value).getTime() < today.getTime() || new Date(control.value).getTime() > today.getTime()+ fiveDaysInMilliSeconds)
-           return { "wrongDay": true };
+    if (new Date(control.value).getTime() < today.getTime() || new Date(control.value).getTime() > today.getTime() + fiveDaysInMilliSeconds)
+      return { "wrongDay": true };
 
-       return null;
-   }
+    return null;
+  }
 }

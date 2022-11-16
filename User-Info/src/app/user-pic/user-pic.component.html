@@ -1,4 +1,4 @@
-<p-fileUpload name="userPhoto" accept="image/*" [maxFileSize]="10000000" (onSelect)="selectFile($event)" >
+<p-fileUpload name="userPhoto" accept="image/*" [maxFileSize]="10000000" (onSelect)="selectFile($event)">
     <ng-template let-file pTemplate="file">
         <img [src]="userService.pic" width="50" height="50">
     </ng-template>
