@@ -1,0 +1,16 @@
+label{
+    margin: auto;
+}
+.p-calendar,.p-dropdown{
+    width:100% !important;
+}
+.error{
+    color: red;
+    font-size: smaller;
+}
+form p{
+    text-align: end;
+}
+.p-inputtext{
+    padding: 0.1rem 0.1rem;
+}

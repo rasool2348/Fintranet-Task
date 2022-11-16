@@ -1,1 +1,27 @@
-<p>user-form works!</p>
+<form [formGroup]="userForm" fxLayout="column" fxLayoutAlign="center" fxLayoutGap="0.5rem">
+
+    <section fxFlex="25" fxLayout="row">
+        <label for="amount" fxFlex="50">Amount</label>
+        <input id="amount"  fxFlex="50" type="number" pInputText formControlName="amount">
+    </section>
+    <section fxFlex="25" fxLayout="column">
+        <div fxLayout="row">
+            <label for="date" fxFlex="50">Date</label>
+            <p-calendar id="date" fxFlex="50" formControlName="date" dateFormat="dd.mm.yy" formControlName="date"></p-calendar>
+        </div>
+        <p *ngIf="userForm.controls.date.invalid" class="error">msut be only in next 5 days</p>
+    </section>
+    <section fxFlex="25" fxLayout="row">
+        <label for="status" fxFlex="50">Status</label>
+        <p-dropdown id="status" fxFlex="50" [options]="statuses" optionLabel="name" optionValue="code" formControlName="status"></p-dropdown>    
+    </section>
+    <section fxFlex="25" fxLayout="column">
+        <div fxLayout="row">
+            <label for="fund" fxFlex="50">Fund</label>
+            <input id="fund" fxFlex="50" type="text" pInputText formControlName="fund">
+        </div>
+        <p *ngIf="userForm.controls.fund.invalid" class="error">msut be letter</p>
+    </section>
+    
+
+</form>
