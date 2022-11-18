@@ -1,29 +1,40 @@
-<form [formGroup]="userForm" fxLayout="column" fxLayoutAlign="center" fxLayoutGap="0.5rem">
+<p-card>
+    <form [formGroup]="userForm" fxLayout="column" fxLayoutAlign="center" fxLayoutGap="0.5rem">
 
-    <section fxFlex="25" fxLayout="row">
-        <label for="amount" fxFlex="50">Amount</label>
-        <input id="amount" fxFlex="50" type="number" pInputText formControlName="amount">
-    </section>
-    <section fxFlex="25" fxLayout="column">
-        <div fxLayout="row">
-            <label for="date" fxFlex="50">Date</label>
-            <p-calendar id="date" fxFlex="50" formControlName="date" dateFormat="dd.mm.yy" formControlName="date">
-            </p-calendar>
+        <section fxFlex="25" fxLayout="column">
+            <div fxLayout=row>
+                <label for="amount" fxFlex="50">Amount</label>
+                <input id="amount" fxFlex="50" type="number" pInputText formControlName="amount">
+            </div>
+            <p *ngIf="userForm.controls.amount.invalid && userForm.controls.amount.touched" class="error">fill the amount</p>
+        </section>
+        <section fxFlex="25" fxLayout="column">
+            <div fxLayout="row">
+                <label for="date" fxFlex="50">Date</label>
+                <p-calendar id="date" fxFlex="50" formControlName="date" dateFormat="dd.mm.yy" formControlName="date">
+                </p-calendar>
+            </div>
+            <p *ngIf="userForm.controls.date.invalid && userForm.controls.date.touched" class="error">msut be only in next 5 days</p>
+        </section>
+        <section fxFlex="25" fxLayout="row">
+            <label for="status" fxFlex="50">Status</label>
+            <p-dropdown id="status" fxFlex="50" [options]="statuses" optionLabel="name" optionValue="code"
+                formControlName="status"></p-dropdown>
+        </section>
+        <section fxFlex="25" fxLayout="column">
+            <div fxLayout="row">
+                <label for="fund" fxFlex="50">Fund</label>
+                <input id="fund" fxFlex="50" type="text" pInputText formControlName="fund">
+            </div>
+            <p *ngIf="userForm.controls.fund.invalid && userForm.controls.fund.touched" class="error">msut be letter</p>
+        </section>
+
+
+    </form>
+    <ng-template pTemplate="footer">
+        <div fxLayout="row" fxLayoutAlign="space-between">
+            <p-button label="Before" (click)="goToLastPage()"></p-button>
+            <p-button label="Next" (click)="goToNextPage()" [disabled]="userForm.invalid"></p-button>
         </div>
-        <p *ngIf="userForm.controls.date.invalid" class="error">msut be only in next 5 days</p>
-    </section>
-    <section fxFlex="25" fxLayout="row">
-        <label for="status" fxFlex="50">Status</label>
-        <p-dropdown id="status" fxFlex="50" [options]="statuses" optionLabel="name" optionValue="code"
-            formControlName="status"></p-dropdown>
-    </section>
-    <section fxFlex="25" fxLayout="column">
-        <div fxLayout="row">
-            <label for="fund" fxFlex="50">Fund</label>
-            <input id="fund" fxFlex="50" type="text" pInputText formControlName="fund">
-        </div>
-        <p *ngIf="userForm.controls.fund.invalid" class="error">msut be letter</p>
-    </section>
-
-
-</form>
+    </ng-template>
+</p-card>

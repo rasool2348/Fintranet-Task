@@ -11,7 +11,7 @@ export class AppComponent {
 
   items:Item[] = [
     new Item('Upload Image','upload'),
-    new Item('User Info','upload'),
+    new Item('User Info','user'),
     new Item('People','people'),
     new Item('Confirmation','confirmation'),
   ]

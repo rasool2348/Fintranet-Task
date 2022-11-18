@@ -3,6 +3,7 @@ import { TableColumn } from 'src/models/table-column';
 import { User } from 'src/models/user';
 import { UserService } from 'src/services/user-service';
 import { ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-table',
@@ -12,10 +13,12 @@ import { ViewEncapsulation } from '@angular/core';
 })
 export class UserTableComponent implements OnInit {
 
-  constructor(public userService: UserService) { }
+  constructor(
+    public userService: UserService,
+    private router:Router) { }
 
   ngOnInit(): void {
-    this.selectUser(this.userService.selectedUser);
+    
   }
 
   cols = [
@@ -27,7 +30,14 @@ export class UserTableComponent implements OnInit {
 
   selectUser(user: User) {
     this.userService.selectedUser = user;
-    this.userService.selectUser.next(user);
+    this.goToLastPage();
+  }
+
+  goToNextPage(){
+    this.router.navigate(['/confirmation']);
+  }
+  goToLastPage(){
+    this.router.navigate(['/user']);
   }
 
 }

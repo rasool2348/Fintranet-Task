@@ -5,6 +5,7 @@ import { Validators } from '@angular/forms';
 import { FormControl, ValidationErrors } from '@angular/forms';
 import { UserService } from 'src/services/user-service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,13 +16,16 @@ import { Subscription } from 'rxjs';
 })
 export class UserFormComponent implements OnInit, OnDestroy {
 
-  constructor(private fb: FormBuilder, public userService: UserService) { }
+  constructor(
+    private fb: FormBuilder, 
+    public userService: UserService,
+    private router:Router) { }
 
   userForm = this.fb.group({
     amount: [0, [Validators.required]],
     date: [new Date(), [Validators.required, DateValidator.LessThanToday]],
-    status: ['', Validators.required],
-    fund: ['', [Validators.required, Validators.pattern('^[a-zA-Z \-\']+')]]
+    status: ['Open to work', Validators.required],
+    fund: ['A', [Validators.required, Validators.pattern('^[a-zA-Z \-\']+')]]
   })
 
   statuses = [
@@ -31,25 +35,39 @@ export class UserFormComponent implements OnInit, OnDestroy {
     { name: 'Open to hire', code: 'Open to hire' },
   ]
 
-  subscription: Subscription;
 
   ngOnInit(): void {
-    this.subscription = this.userService.selectUser.subscribe(
-      user => {
         this.userForm.patchValue(
           {
-            amount: user.amount,
-            date: user.date,
-            status: user.status,
-            fund: user.fund
+            amount: this.userService.selectedUser.amount,
+            date: this.userService.selectedUser.date,
+            status: this.userService.selectedUser.status,
+            fund: this.userService.selectedUser.fund
           }
         )
-      }
-    )
+  }
+
+  goToNextPage(){
+    this.userService.selectedUser.amount = this.userForm.controls.amount.value;
+    this.userService.selectedUser.status = this.userForm.controls.status.value;
+    this.userService.selectedUser.fund = this.userForm.controls.fund.value;
+    this.userService.selectedUser.date = this.userForm.controls.date.value;
+
+    let userIndex = this.userService.users.findIndex(user => user.id == this.userService.selectedUser.id);
+    if(userIndex < 0){
+      this.userService.users.push(this.userService.selectedUser);
+    }else{
+      this.userService.users[userIndex] = this.userService.selectedUser;
+    }
+    
+
+    this.router.navigate(['/people']);
+  }
+  goToLastPage(){
+    this.router.navigate(['/upload']);
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 
 

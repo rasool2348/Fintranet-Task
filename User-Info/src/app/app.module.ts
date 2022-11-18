@@ -12,6 +12,7 @@ import { PrimeNgModule } from './primeng.module';
 import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserService } from 'src/services/user-service';
+import { AppRoutingModule } from './app.routing.module';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { UserService } from 'src/services/user-service';
     FlexLayoutModule,
     PrimeNgModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

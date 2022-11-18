@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+import { User } from 'src/models/user';
 import { UserService } from 'src/services/user-service';
 
 @Component({
@@ -9,15 +11,23 @@ import { UserService } from 'src/services/user-service';
 })
 export class UserPicComponent implements OnInit {
 
-  constructor(private sanitizer: DomSanitizer, public userService: UserService) { }
+  constructor(
+    private sanitizer: DomSanitizer, 
+    public userService: UserService,
+    private router:Router) { }
 
   ngOnInit(): void {
+    this.userService.createNewUser();
   }
 
 
 
-  async selectFile(file: any) {
-    this.userService.pic = this.sanitizer.bypassSecurityTrustUrl(file.currentFiles[0].objectURL.changingThisBreaksApplicationSecurity);
+  selectFile(file: any) {
+    this.userService.selectedUser.pic = this.sanitizer.bypassSecurityTrustUrl(file.currentFiles[0].objectURL.changingThisBreaksApplicationSecurity);
+  }
+
+  goToNextPage(){
+    this.router.navigate(['/user'])
   }
 
 }

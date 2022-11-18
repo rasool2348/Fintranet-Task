@@ -1,9 +1,12 @@
 <p-card>
-    <img [src]="userService.pic" width="50" height="50" alt="no Image selected">
+    <img [src]="userService.selectedUser.pic" width="50" height="50" alt="no Image selected">
     <p>
         <span>Amount:</span> {{userService.selectedUser.amount}} <span>Date:</span>
         {{userService.selectedUser.date.toDateString()}}
         <span>Status:</span> {{userService.selectedUser.status}} <span>Fund:</span> {{userService.selectedUser.fund}}
     </p>
-
+    <div fxLayout="row" fxLayoutAlign="space-between">
+        <p-button label="Before" (click)="goToLastPage()"></p-button>
+        <p-button label="Complete" (click)="goToNextPage()"></p-button>
+    </div>
 </p-card>

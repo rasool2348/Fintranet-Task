@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from 'src/services/user-service';
 
 @Component({
@@ -8,9 +9,18 @@ import { UserService } from 'src/services/user-service';
 })
 export class UserSummaryComponent implements OnInit {
 
-  constructor(public userService:UserService) { }
+  constructor(
+    public userService:UserService,
+    private router:Router) { }
 
   ngOnInit(): void {
+  }
+
+  goToNextPage(){
+    this.router.navigate(['/upload']);
+  }
+  goToLastPage(){
+    this.router.navigate(['/people']);
   }
 
 }
