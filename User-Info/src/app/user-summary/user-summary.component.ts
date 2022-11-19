@@ -17,6 +17,7 @@ export class UserSummaryComponent implements OnInit {
   }
 
   goToNextPage(){
+    this.userService.createNewUser();
     this.router.navigate(['/upload']);
   }
   goToLastPage(){

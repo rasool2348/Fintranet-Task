@@ -16,11 +16,7 @@ export class UserPicComponent implements OnInit {
     public userService: UserService,
     private router:Router) { }
 
-  ngOnInit(): void {
-    this.userService.createNewUser();
-  }
-
-
+  ngOnInit(): void {}
 
   selectFile(file: any) {
     this.userService.selectedUser.pic = this.sanitizer.bypassSecurityTrustUrl(file.currentFiles[0].objectURL.changingThisBreaksApplicationSecurity);
